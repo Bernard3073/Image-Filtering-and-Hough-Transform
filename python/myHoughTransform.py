@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import tqdm
 
 def myHoughTransform(image, rhoRes, thetaRes):
     # YOUR CODE HERE
@@ -14,14 +15,14 @@ def myHoughTransform(image, rhoRes, thetaRes):
     #Range of radius
     rhos = np.arange(-diag_dist, diag_dist+1, rhoRes)
     H = np.zeros((len(rhos), len(thetas)), dtype=np.uint8)
-    # finad all edge(nonzero) pixel indexes
+    # find all edge(nonzero) pixel indexes
     y_idx, x_idx = np.nonzero(image)
     # Cycle through edge points
-    for i in range(len(x_idx)):
+    for i in tqdm(range(len(x_idx))):
         x = x_idx[i]
         y = y_idx[i]
         for j in range(len(thetas)):
-            rho = int(x*np.cos(thetas[j]) + y*np.sin(thetas[j]))
-            H[rho + int(diag_dist), j] += 1
+            rho = int(x*np.cos(thetas[j]) + y*np.sin(thetas[j]) + diag_dist)
+            H[int(rho/rhoRes), j] += 1
     
     return H, rhos, thetas

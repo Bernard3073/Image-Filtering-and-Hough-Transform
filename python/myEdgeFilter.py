@@ -12,9 +12,9 @@ def grad_angle(imgx, imgy):
     # grad_mag = np.sqrt(imgx**2 + imgy**2)
     # grad_mag *= 255/grad_mag.max()
     # grad_dir = np.arctan2(imgy, imgx)
-    plt.imshow(grad_mag, cmap='gray')
-    plt.title('Gradient Magnitude')
-    plt.show()
+    # plt.imshow(grad_mag, cmap='gray')
+    # plt.title('Gradient Magnitude')
+    # plt.show()
     return grad_mag, grad_dir
 
 def non_max_suppression(grad_mag, grad_dir):
@@ -40,9 +40,9 @@ def non_max_suppression(grad_mag, grad_dir):
 
             if grad_mag[row, col] >= before_pixel and grad_mag[row, col] >= after_pixel:
                 output[row, col] = grad_mag[row, col]
-    plt.imshow(output, cmap='gray')
-    plt.title("Non Max Suppression")
-    plt.show()
+    # plt.imshow(output, cmap='gray')
+    # plt.title("Non Max Suppression")
+    # plt.show()
     return output
 
 def threshold(image, low, high, weak):
@@ -57,9 +57,9 @@ def threshold(image, low, high, weak):
     output[strong_row, strong_col] = strong
     output[weak_row, weak_col] = weak
 
-    plt.imshow(output, cmap='gray')
-    plt.title("threshold")
-    plt.show()
+    # plt.imshow(output, cmap='gray')
+    # plt.title("threshold")
+    # plt.show()
  
     return output
 

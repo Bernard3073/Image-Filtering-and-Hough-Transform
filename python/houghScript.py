@@ -6,8 +6,8 @@ from myEdgeFilter import myEdgeFilter
 from myHoughLines import myHoughLines
 from myHoughTransform import myHoughTransform
 
-datadir    = '../data'      # the directory containing the images
-resultsdir = '../results'   # the directory for dumping results
+datadir    = './data'      # the directory containing the images
+resultsdir = './results'   # the directory for dumping results
 
 # parameters
 sigma     = 2
@@ -24,7 +24,11 @@ for file in os.listdir(datadir):
         
         # read in images
         img = cv2.imread('%s/%s.jpg' % (datadir, file))
-        
+        scale_percent = 30 # percent of original size
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        img = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
         if (img.ndim == 3):
             img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         
